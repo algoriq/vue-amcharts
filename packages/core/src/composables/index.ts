@@ -1,11 +1,12 @@
-import type { ChartContext } from "../types";
-import {onUnmounted, Ref, shallowRef, watch} from "vue";
-import { Root } from "@amcharts/amcharts5";
+import type { ChartContext } from '../types';
+import { onUnmounted, type Ref, shallowRef, watch } from 'vue';
+import { Root } from '@amcharts/amcharts5';
 import * as am5 from '@amcharts/amcharts5'
 import * as am5hierarchy from '@amcharts/amcharts5/hierarchy'
 import * as am5percent from '@amcharts/amcharts5/percent'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import am5themes_Responsive from '@amcharts/amcharts5/themes/Responsive'
+import { createDonutChart, createFunnelSeries, createPieChart, createPieSeries, createSliceChart } from '../helpers/pie-chart-helper'
 
 export function useAmCharts5(context: Ref<ChartContext>) {
   const rootRef = shallowRef<Root>()
@@ -60,6 +61,13 @@ export function useAmCharts5(context: Ref<ChartContext>) {
     }
   }
 
+  const getRoot = (): Root => {
+    if (!rootRef.value) {
+      throw new Error('Root chart element is not initialized')
+    }
+    return rootRef.value
+  }
+
   watch(contextRef, (newVal, oldVal) => {
     if (newVal !== oldVal) {
       refreshRoot()
@@ -76,6 +84,24 @@ export function useAmCharts5(context: Ref<ChartContext>) {
     disposeRoot,
     clearChildrenOfRoot,
     setChartColors,
+    // Charts
+    createPieChart: (settings?: am5percent.IPieChartSettings): am5percent.PieChart => {
+      return createPieChart(getRoot(), settings)
+    },
+    createDonutChart: (settings?: am5percent.IPieChartSettings): am5percent.PieChart => {
+      return createDonutChart(getRoot(), settings)
+    },
+    createSliceChart: (settings?: am5percent.ISlicedChartSettings): am5percent.SlicedChart => {
+      return createSliceChart(getRoot(), settings)
+    },
+    // Series
+    createPieSeries: (settings?: am5percent.IPieSeriesSettings): am5percent.PieSeries => {
+      return createPieSeries(getRoot(), settings)
+    },
+    createFunnelSeries: (settings?: am5percent.IFunnelSeriesSettings): am5percent.FunnelSeries => {
+      return createFunnelSeries(getRoot(), settings)
+    },
+    // Utils
     percent: am5.percent,
     color: am5.color,
   }
