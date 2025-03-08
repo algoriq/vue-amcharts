@@ -1,0 +1,23 @@
+{
+  "name": "vue-amcharts-monorepo",
+  "private": true,
+  "description": "Using amCharts 5 with Vue.js",
+  "scripts": {
+    "serve": "bun run --filter \"./packages/*\" dev",
+    "build": "bun run --filter \"@algoriq/core\" --filter \"!@algoriq/docs\" build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/algoriq/vue-amcharts.git"
+  },
+  "keywords": [],
+  "author": "Sergey Sukhorukov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/algoriq/vue-amcharts/issues"
+  },
+  "homepage": "https://github.com/algoriq/vue-amcharts#readme",
+  "workspaces": [
+    "packages/*"
+  ]
+}
