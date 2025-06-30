@@ -1,4 +1,4 @@
-import type { Root } from '@amcharts/amcharts5'
+import { Root } from '@amcharts/amcharts5'
 import type { IPieChartSettings } from '@amcharts/amcharts5/.internal/charts/pie/PieChart'
 import type { IFunnelSeriesSettings, IPieSeriesSettings, ISlicedChartSettings } from '@amcharts/amcharts5/percent'
 import * as am5 from '@amcharts/amcharts5'
@@ -47,3 +47,14 @@ export function createFunnelSeries(root: Root, settings?: IFunnelSeriesSettings)
     ...settings,
   })
 }
+
+export const setPieLabelText = (chart: am5percent.PieChart, settings?: am5.Template<am5.Label>['_settings']): void => {
+  chart.seriesContainer.children.push(
+    am5.Label.new(chart.root, {
+      textAlign: 'center',
+      centerY: am5.p50,
+      centerX: am5.p50,
+      ...settings,
+    }),
+  );
+};

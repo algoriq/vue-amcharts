@@ -4,7 +4,8 @@
   "description": "Using amCharts 5 with Vue.js",
   "scripts": {
     "serve": "bun run --filter \"./packages/*\" dev",
-    "build": "bun run --filter \"@algoriq/core\" --filter \"!@algoriq/docs\" build"
+    "build": "bun run --filter \"@algoriq/vue-amcharts\" --filter \"!@algoriq/docs\" build",
+    "lint:fix": "bun run --filter \"@algoriq/vue-amcharts\" lint:fix"
   },
   "repository": {
     "type": "git",
